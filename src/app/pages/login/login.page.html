@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar color="danger">
-    <ion-title>Login</ion-title>
+    <ion-title style="text-align: center;">Login</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -26,6 +26,10 @@
 
       <ion-item lines='none'>
         <a routerLink='/signup'>Create Account</a>
+      </ion-item>
+
+      <ion-item lines='none'>
+        <a routerLink='/forgotpassword'>forgot password</a>
       </ion-item>
     </ion-list>
     <ion-button expand="block" share="round" color="dark" (click)="loginAction()">Login</ion-button>
