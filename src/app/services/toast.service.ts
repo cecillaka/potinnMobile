@@ -10,7 +10,7 @@ export class ToastService {
   async presentToast(infoMessage: string) {
     const toast = await this.toastController.create({
       message: infoMessage,
-      duration: 3000
+      duration: 4000
     });
     toast.present();
   }

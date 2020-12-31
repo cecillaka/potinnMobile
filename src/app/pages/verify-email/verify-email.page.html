@@ -1,0 +1,12 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title style="text-align: center;">Verify Your Email</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+
+  <ion-progress-bar color="dark" [type]="'indeterminate'" *ngIf="showLoader"></ion-progress-bar>
+  <ion-button expand="block" share="round" color="dark" (click)="test()">Verify My Email</ion-button>
+</ion-content>

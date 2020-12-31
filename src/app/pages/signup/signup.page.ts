@@ -1,3 +1,4 @@
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthConstants } from './../../config/auth-constants';
@@ -20,15 +21,35 @@ export class SignupPage implements OnInit {
     email: '',
     password: ''
   };
+  showLoader: boolean;
+  public imgProps: any = [];
+  public authUser: any;
+
+  postData1 = {
+    user_id: '',
+    token: ''
+  };
+
 
   constructor(
     private authService: AuthService,
     private toastService: ToastService,
     private storageService: StorageService,
-    private router: Router
+    private router: Router,
+    private auth: AuthService,
+    public http: HttpClient,
   ) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+
+    this.auth.data$.subscribe((res: any) => {
+      this.authUser = res;
+      this.feedData();
+      // this.getMusic();
+    });
+
+
+  }
 
   validateInputs() {
     let first_name = this.postData.first_name.trim();
@@ -58,6 +79,79 @@ export class SignupPage implements OnInit {
       password.length > 0
     );
   }
+
+  feedData() {
+    console.log(this.authUser.jwtToken);
+    this.postData1.user_id = this.authUser.user_id;
+    this.postData1.token = this.authUser.jwtToken;
+    if (this.postData1.user_id && this.postData1.token) {
+     // tslint:disable-next-line: no-unused-expression
+     (error: any) => {
+        this.toastService.presentToast('Network Issue.');
+        };
+    }
+  }
+  showProgressBar() {
+    this.showLoader = true;
+  }
+
+  hideProgressBar() {
+    this.showLoader = false;
+  }
+
+  getHeaders() {
+    // storing token inside a variable t
+    const t = this.authUser.jwtToken;
+ 
+    // declaring headers for passing token data
+    // tslint:disable-next-line: variable-name
+    const headers_object = new HttpHeaders({
+ 
+      Accept: 'application/json',
+      Authorization: 'Bearer ' + t
+ 
+      });
+    const httpOptions = {
+            headers: headers_object
+          };
+    return httpOptions;
+         }
+
+
+
+
+         verifyEmail() {
+
+        
+        this.showProgressBar();
+        
+          // verify user email
+          this.http.post('http://127.0.0.1:8000/api/email/resend' , this.getHeaders()  ).subscribe(
+              // check errors
+            (response: any) => {
+              this.toastService.presentToast('Check your Email to proceed.');
+              this.hideProgressBar();
+         
+            },
+            (error: any) => {
+              this.toastService.presentToast('Email does not exist on our server.');
+              // Hide Progress
+              // this.getImages();
+              this.hideProgressBar();
+            }
+      
+      
+          );
+      
+       
+      
+      
+        }
+      
+      
+
+
+
 
   signupAction() {
     if (this.validateInputs()) {
