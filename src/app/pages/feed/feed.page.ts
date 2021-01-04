@@ -20,6 +20,13 @@ export class FeedPage implements OnInit {
     email_verified_at1:''
   };
   userInfo: any;
+  bytes:any;
+  newbytes:any;
+  progressbarColor:any;
+
+  progressbarValue:any;
+  gig:any;
+  mb:any;
   constructor(
     private auth: AuthService,
     private feedSerive: FeedService,
@@ -35,11 +42,11 @@ export class FeedPage implements OnInit {
       this.feedData();  
        this.verify();
     });
- 
+    this.verify();
   }
 
   feedData() {
-    console.log(this.authUser);
+    // console.log(this.authUser);
     this.postData.user_id = this.authUser.user_id;
     this.postData.token = this.authUser.token;
     // this.postData. email_verified_at1= this.aemail_verified_at
@@ -79,30 +86,52 @@ export class FeedPage implements OnInit {
           };
     return httpOptions;
          }
- 
 
-
+        
 
   verify() {
 
     this.http.get('http://127.0.0.1:8000/api/auth/user', this.getHeaders()).subscribe((data) => {
 
       this.userInfo = data;
-     //  this.imageData$ = data;
- 
+     
       console.log(this.userInfo);
-      if (this.userInfo.email_verified_at !=='null'||this.userInfo.email_verified_at ==='') {
-         
-         this.toastService.presentToast('Please verify your email.');
-         this.router.navigate(['verify-email']);
+      this.bytes=this.userInfo.size/(1024*1024);
+      this.gig=this.userInfo.size/(1024*1024*1024);
+
+       this.newbytes=Math.round(this.bytes)+" "+"MB"
+this.progressbarValue=(this.userInfo.size/(1024*1024))/500
+console.log(this.progressbarValue);
+
+
+
+if(this.progressbarValue<5){
+  this.progressbarColor="danger"
+}
+      if (this.userInfo.email_verified_at) {
+       
+        return this.toastService.presentToast(' email verified.');
+        //  this.router.navigate(['verify-email']);
+
+       
       }
  
-     
+      else{
+        this.toastService.presentToast('Please verify your email.');
+        // return  this.router.navigate(['verify-email']);
+        this.router.navigate(['verify-email']);
+      }
     });
 
 
  
   }
+
+
+
+
+
+
 
 
 

@@ -24,7 +24,8 @@ const routes: Routes = [
   { path: 'preview-modal', loadChildren: './preview-modal/preview-modal.module#PreviewModalPageModule' },
   // { path: 'books', loadChildren: './books/books.module#BooksPageModule' },
   { path: 'books', loadChildren: './pages/books/books.module#BooksPageModule' },  { path: 'forgotpassword', loadChildren: './pages/forgotpassword/forgotpassword.module#ForgotpasswordPageModule' },
-  { path: 'verify-email', loadChildren: './pages/verify-email/verify-email.module#VerifyEmailPageModule' }
+  { path: 'verify-email', loadChildren: './pages/verify-email/verify-email.module#VerifyEmailPageModule' },
+  { path: 'email', loadChildren: './pages/email/email.module#EmailPageModule' }
 
 
 

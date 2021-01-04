@@ -21,13 +21,13 @@
 <img style="height:280px;" src=" assets/images/nice1.jpg" alt="nothing to display" >
 
 
-<ion-fab  >
+<!-- <ion-fab  >
   <ion-fab-button  color="dark">
     <img style="height:280px;" src=" assets/images/person.png" alt="nothing to display" >
   </ion-fab-button>
-</ion-fab>
+</ion-fab> -->
 
-    <ion-card   style="margin-top: -30px;border-radius: 15px;"> 
+    <ion-card   style="margin-top: -40px;border-radius: 15px;background-color: red;" > 
       
       <ion-list>
         <br>
@@ -57,11 +57,13 @@
         </ion-item>
         <br>
         <ion-item>
-          <ion-icon color="primary" name="mail"></ion-icon>
-          <ion-label position="floating"> {{ authUser.user?.size }}</ion-label>
+          
+          <ion-icon color="{{progressbarColor}}" name="cloud"> </ion-icon>
+          <ion-progress-bar style="height: 20px;" color="{{progressbarColor}}" value="{{progressbarValue}}"></ion-progress-bar>
+          <ion-label position="floating"> {{newbytes }} of 500MB</ion-label>
           <ion-input type="email"></ion-input>
         </ion-item>
-
+      
      
       </ion-list>
 

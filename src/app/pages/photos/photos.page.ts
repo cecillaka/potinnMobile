@@ -181,7 +181,7 @@ getHeaders() {
 
     );
 
-  } else if (this.form.get('files').value === ' ') {
+  } else  {
     this.toastService.presentToast('Nothing to Upload !');
     // Hide Progress
     // this.getImages();

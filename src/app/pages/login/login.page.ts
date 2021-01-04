@@ -47,6 +47,8 @@ export class LoginPage implements OnInit {
               .store(AuthConstants.AUTH, res.data)
               .then(res => {
                 this.router.navigate(['home/feed']);
+                
+          
               });
           } else {
             this.toastService.presentToast('Network issue');

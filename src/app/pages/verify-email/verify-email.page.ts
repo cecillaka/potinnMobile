@@ -23,22 +23,9 @@ import { Router } from '@angular/router';
 })
 export class VerifyEmailPage implements OnInit {
 
-  images: ApiImage[] = [];
-  @ViewChild('fileInput', { static: false }) fileInput: ElementRef;
-  img1: any;
-  url: any;
-  form: FormGroup;
   showLoader: boolean;
-  public imgProps: any = [];
+
   public authUser: any;
-
-  postData = {
-    user_id: '',
-    token: ''
-  };
-  thumbnail: any = [];
-// test
-
 
   constructor( private api: ApiService,
     private plt: Platform,
@@ -58,23 +45,13 @@ export class VerifyEmailPage implements OnInit {
   ngOnInit() {
     this.auth.data$.subscribe((res: any) => {
       this.authUser = res;
-      this.feedData();
+      
       
     });
 
   }
 
-  feedData() {
-    console.log(this.authUser.jwtToken);
-    this.postData.user_id = this.authUser.user_id;
-    this.postData.token = this.authUser.jwtToken;
-    if (this.postData.user_id && this.postData.token) {
-     // tslint:disable-next-line: no-unused-expression
-     (error: any) => {
-        this.toastService.presentToast('Network Issue.');
-        };
-    }
-  }
+
   showProgressBar() {
     this.showLoader = true;
   }
@@ -103,43 +80,59 @@ getHeaders() {
 
 
 
-test(){
-  this.auth.data$.subscribe((res: any) => {
-    this.authUser = res;
-    this.feedData();
-     this.verifyEmail();
-  });
-}
-
-  verifyEmail() {
-
-   
-    this.showProgressBar();
+// test(){
+//   this.auth.data$.subscribe((res: any) => {
+//     this.authUser = res;
     
-      // verify user email
-      this.http.post('http://127.0.0.1:8000/api/email/resend',this.getHeaders()).subscribe(
-          // check errors
+//      this.verifyEmail();
+//   });
+// }
+
+
+logoutAction() {
+  this.authService.logout();
+}
+ 
+verifyEmail() {
+
+    this.showProgressBar();
+
+    
+      this.http.get('http://127.0.0.1:8000/api/email/resend',this.getHeaders()).subscribe(
+          // check errors and response
         (response: any) => {
-          this.toastService.presentToast('Check your Email to proceed.');
-          this.router.navigate(['login']);
+          if(response){
+          this.toastService.presentToast(response.message);
+         console.log(response);
           this.hideProgressBar();
+         return  this.logoutAction();
+        }
+
+        else{
+          
+          console.log(response);
+           this.hideProgressBar();
+        
+         return this.toastService.presentToast(response.message);
+        }
+
      
         },
         (error: any) => {
-          this.toastService.presentToast('Email does not exist on our server.');
-          console.log(error);
-          // Hide Progress
-         
           this.hideProgressBar();
+          console.log(error);
+          this.toastService.presentToast('something went wrong, try again after 10 min');
+          return this.logoutAction();
+        
+          
         }
   
   
       );
   
-   
-  
-  
     }
+
+
 
 
 
