@@ -14,6 +14,7 @@ import { WebView } from '@ionic-native/ionic-webview/ngx';
 import { FilePath } from '@ionic-native/file-path/ngx';
 import { PreviewAnyFile } from '@ionic-native/preview-any-file/ngx';
 import { VideoPlayer } from '@ionic-native/video-player/ngx';
+// import { FeedPage } from '../src/app/pages/feed/feed.module;
 import { ServicesAuthInterceptorsService } from './services/services-auth-interceptors.service';
 // import { IonicStorageModule } from '@ionic/storage';
 @NgModule({

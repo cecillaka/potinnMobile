@@ -32,11 +32,24 @@
       <ion-list>
         <br>
         <ion-item>
-          <ion-icon color="primary" name="person" position="fixed"></ion-icon>
-
-          <ion-label position="floating">{{ authUser.user?.first_name }} , {{ authUser.user?.last_name }}   </ion-label>
-          <ion-input></ion-input>
+          
+          <ion-icon color="primary" name="person"></ion-icon>
+          <ion-label position="floating" style="font-weight: bold;">{{ first_name }}</ion-label>
+          <ion-input autocomplete="off" name="first_name" type="text" [(ngModel)]="postData1.first_name">
+          </ion-input>
+          <ion-icon color="{{ tickColor1}}" style="margin-left:160px; width: 200px; height: 30px;" (click)="updateFname()" name="checkmark-circle">
+          </ion-icon>
         </ion-item>
+
+
+          <ion-item>
+          <ion-icon name="checkmark-done-circle-outline"></ion-icon>
+        <ion-label position="floating" style="font-weight: bold;">{{ last_name }}</ion-label>
+        <ion-input autocomplete="off" name="last_name" type="text"  [(ngModel)]="postData2.last_name">
+        </ion-input>
+        <ion-icon  color="{{ tickColor2}}" style="margin-left:160px; width: 200px; height: 30px;" (click)="updateLname()" name="checkmark-circle">
+        </ion-icon>
+      </ion-item>
 <br>
         <ion-item>
           <ion-icon color="primary" name="calendar"></ion-icon>
@@ -46,8 +59,10 @@
 <br>
         <ion-item>
           <ion-icon color="primary" name="call"></ion-icon>
-          <ion-label position="floating"> {{ authUser.user?.phone_number }}</ion-label>
-          <ion-input  type="tel"></ion-input>
+          <ion-label position="floating"> {{ phone_number }}</ion-label>
+          <ion-input  type="tel" [(ngModel)]="postData3.phone_number"></ion-input>
+          <ion-icon  color="{{ tickColor3}}" style="margin-left:160px; width: 200px; height: 30px;" (click)="updateTel()" name="checkmark-circle">
+          </ion-icon>
         </ion-item>
 <br>
         <ion-item>
@@ -68,7 +83,8 @@
       </ion-list>
 
     </ion-card>
-    <ion-button size="full" color="dark">Update Profile </ion-button >
+    <!-- <ion-button size="full" color="dark" (click)="updateFname()">Update Profile </ion-button >
+      <ion-button (click)="updateFname()"> </ion-button > -->
     
 </ion-card>
 </ion-content>

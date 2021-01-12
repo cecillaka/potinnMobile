@@ -13,8 +13,10 @@ import { FormGroup, FormBuilder, ReactiveFormsModule, FormControl, Validators} f
 import { FileEntry } from '@ionic-native/file';
 import {NgForm} from '@angular/forms';
 import { FeedService } from 'src/app/services/feed.service';
+// import { FeedPage } from '../feed/feed.page';
 import { BehaviorSubject } from 'rxjs';
 import {  AlertController } from '@ionic/angular';
+
 
 const { Camera } = Plugins;
 
@@ -58,6 +60,7 @@ export class PhotosPage implements OnInit {
               private sanitizer: DomSanitizer,
               private feedSerive: FeedService,
               public alertController: AlertController,
+              // public feed: FeedPage,
               ) {
     // this.loadImages();
     this.form = this.fb.group({
@@ -145,7 +148,8 @@ getHeaders() {
    const headers_object = new HttpHeaders({
 
      Accept: 'application/json',
-     Authorization: 'Bearer ' + t
+     Authorization: 'Bearer ' + t,
+     'type': "image",
 
      });
    const httpOptions = {
@@ -169,7 +173,7 @@ getHeaders() {
         this.toastService.presentToast('Picture Upload successfully.');
         this.hideProgressBar();
         this.getImages();
-
+// this.feed.verify();
       },
       (error: any) => {
         this.toastService.presentToast('Network Issue.');
@@ -234,7 +238,8 @@ deleteImage(i) {
     this.toastService.presentToast('Picture deleted successfully.');
     this.hideProgressBar();
     this.getImages();
-
+    
+console.log(res);
   },
   (error: any) => {
     this.toastService.presentToast('Network Issue try again.');
@@ -279,7 +284,7 @@ async AlertDeleteImage(i) {
 downloadImage(i) {
 
 
-  this.http.post('http://127.0.0.1:8000/api/file/download' + '/' + i , this.getHeaders()  ).subscribe(
+  this.http.get('http://127.0.0.1:8000/api/file/download' + '/' + i , this.getHeaders()  ).subscribe(
     // check errors and response
   (res: any) => {
     this.toastService.presentToast('Picture downloaded successfully.');
@@ -291,7 +296,7 @@ downloadImage(i) {
     this.toastService.presentToast('Network Issue try again.');
     // Hide Progress
     // this.getImages()
-
+console.log(error)
     this.hideProgressBar();
 
     });

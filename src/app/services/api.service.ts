@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { StorageService } from './storage.service';
+
 
 
 const httpOptions = {
@@ -40,6 +41,13 @@ export class ApiService {
 
     return this.http.post('http://127.0.0.1:8000/api/file/images', postData, httpOptions );
   }
+  //test
+
+  // downloadFile(): Observable<HttpResponse<Blob>>{		
+	// 	return this.http.get('http://localhost:8080/employees/download', { responseType: ResponseContentType.Blob });
+  //  }
+   
+  //
 
   uploadImageFile(file: File) {
     const ext = file.name.split('.').pop();

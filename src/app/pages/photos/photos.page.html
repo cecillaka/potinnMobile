@@ -68,7 +68,10 @@
       </ion-fab-button>
       <ion-fab-list side="end">
         <ion-fab-button  (click)=" AlertDeleteImage(item.id)"color="dark"><ion-icon color="danger" name="trash"></ion-icon></ion-fab-button>
-        <ion-fab-button  (click)="  AlertDownloadImage(item.id)" color="dark"><ion-icon color="warning" name="cloud-download"></ion-icon></ion-fab-button>
+  <ion-fab-button  (click)="  AlertDownloadImage(item.id)" color="dark"><ion-icon color="warning" name="cloud-download"></ion-icon></ion-fab-button>
+
+  <a href="item.url" download="images">DownloadFile
+       </a> 
       </ion-fab-list>
     </ion-fab>
 

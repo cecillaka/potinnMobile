@@ -13,17 +13,37 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 })
 export class FeedPage implements OnInit {
   public authUser: any;
+  public postData1 = {
+    first_name: '',
+ 
+  };
 
+  public postData2 = {
+    last_name: '',
+  
+  };
+
+  public postData3 = {
+   phone_number: '',
+  
+  };
   postData = {
     user_id: '',
     token: '',
     email_verified_at1:''
   };
+  first_name: any;
+  last_name: any;
+  phone_number: any;
   userInfo: any;
   bytes:any;
   newbytes:any;
   progressbarColor:any;
-
+  tickColor1:any;
+  tickColor2:any;
+  tickColor3:any;
+  verified:boolean;
+  
   progressbarValue:any;
   gig:any;
   mb:any;
@@ -34,15 +54,18 @@ export class FeedPage implements OnInit {
     private storageService: StorageService,
     private router: Router,
     public http: HttpClient,
-  ) {}
+  ) {
+    this.verified = true;
+  }
 
   ngOnInit() {
     this.auth.data$.subscribe((res: any) => {
       this.authUser = res;
-      this.feedData();  
+      // this.feedData();  
        this.verify();
     });
-    this.verify();
+    
+;
   }
 
   feedData() {
@@ -86,15 +109,114 @@ export class FeedPage implements OnInit {
           };
     return httpOptions;
          }
-
+// update first name
+         updateFname() {  
+          //  this.verify();
+          if(this.postData1.first_name !=="")
+          {
+          this.tickColor1="primary"
+          this.http.post('http://127.0.0.1:8000/api/account/name' , this.postData1, this.getHeaders()  ).subscribe(
+            // check errors
+          (res: any) => {
+            this.tickColor1="success"
+            this.toastService.presentToast('first name Updated successfully.');
+            console.log(res);
+            this.verify();
+    
+          },
+          (error: any) => {
+            this.tickColor1="danger"
+            this.toastService.presentToast('Network Issue.please try again');
+            console.log(error);
+            console.log(error.message);
+            
+          }
         
+    
+        );
+          }
+          else{
+            this.toastService.presentToast('please fill up your first name, before updating');
+          }
+         }
+         
+      // update last name
+      updateLname() {  
+        // this.verify();
+        if(this.postData2.last_name !=="")
+        {
+        this.tickColor2="primary"
+       this.http.post('http://127.0.0.1:8000/api/account/surname' , this.postData2, this.getHeaders()  ).subscribe(
+         // check errors
+       (res: any) => {
+         this.tickColor2="success"
+         this.toastService.presentToast('Last name Updated successfully.');
+         console.log(res);
+         this.verify();
+         
+ 
+       },
+       (error: any) => {
+         this.tickColor2="danger"
+         this.toastService.presentToast('Network Issue.please try again');
+         console.log(error);
+         
+       }
+ 
+ 
+     );
+      }
+      else{
+        this.toastService.presentToast('please fill up your Last name, before updating');
+      }
+      }
+      
+      
+       // update cell number
+       updateTel() {
+        if(this.postData3.phone_number !=="")
+        {  
+        this.tickColor3="primary"
+       this.http.post('http://127.0.0.1:8000/api/account/phone' , this.postData3, this.getHeaders()  ).subscribe(
+         // check errors
+       (res: any) => {
+         this.tickColor3="success"
+         this.toastService.presentToast('Cell phone Updated successfully.');
+         this.verify();
+         console.log(res);
+         
+ 
+       },
+       (error: any) => {
+         this.tickColor3="danger"
+         this.toastService.presentToast('Network Issue.please try again');
+         console.log(error);
+         
+       }
+ 
+ 
+     );
+      }
+      else{
+        this.toastService.presentToast('please fill up your cell number, before updating');
+      }
+      }
+      
 
-  verify() {
+
+
+
+ public verify() {
 
     this.http.get('http://127.0.0.1:8000/api/auth/user', this.getHeaders()).subscribe((data) => {
 
       this.userInfo = data;
-     
+    ; 
+       
+      this.first_name=this.userInfo.first_name;
+      this.last_name=this.userInfo.last_name;
+      this.phone_number=this.userInfo.phone_number;
+
       console.log(this.userInfo);
       this.bytes=this.userInfo.size/(1024*1024);
       this.gig=this.userInfo.size/(1024*1024*1024);
@@ -105,12 +227,22 @@ console.log(this.progressbarValue);
 
 
 
-if(this.progressbarValue<5){
-  this.progressbarColor="danger"
+if(this.progressbarValue<0.5 ){
+  this.progressbarColor="warning"
 }
-      if (this.userInfo.email_verified_at) {
+if(this.progressbarValue>0.5){
+  this.progressbarColor="primary"
+}
+if(this.progressbarValue<0.25){
+  this.progressbarColor="danger"
+  this.toastService.presentToast('Storage almost full,please delete some items.');
+}
+
+
+
+      if (this.userInfo.email_verified_at ) {
        
-        return this.toastService.presentToast(' email verified.');
+        // return this.toastService.presentToast(' email verified.');
         //  this.router.navigate(['verify-email']);
 
        
