@@ -92,7 +92,7 @@ console.log(t);
 
        
         // my posting image to backend
-        this.http.get('http://127.0.0.1:8000/api/email/resend', this.getHeaders()).subscribe((data) => {
+        this.http.get('http://api.princesolutions.co.za/api/email/resend', this.getHeaders()).subscribe((data) => {
        
             this.imgProps = data;
             console.log(this.imgProps);

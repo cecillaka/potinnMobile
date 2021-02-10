@@ -115,7 +115,7 @@ export class FeedPage implements OnInit {
           if(this.postData1.first_name !=="")
           {
           this.tickColor1="primary"
-          this.http.post('http://127.0.0.1:8000/api/account/name' , this.postData1, this.getHeaders()  ).subscribe(
+          this.http.post('http://api.princesolutions.co.za/api/account/name' , this.postData1, this.getHeaders()  ).subscribe(
             // check errors
           (res: any) => {
             this.tickColor1="success"
@@ -146,7 +146,7 @@ export class FeedPage implements OnInit {
         if(this.postData2.last_name !=="")
         {
         this.tickColor2="primary"
-       this.http.post('http://127.0.0.1:8000/api/account/surname' , this.postData2, this.getHeaders()  ).subscribe(
+       this.http.post('http://api.princesolutions.co.za/api/account/surname' , this.postData2, this.getHeaders()  ).subscribe(
          // check errors
        (res: any) => {
          this.tickColor2="success"
@@ -177,7 +177,7 @@ export class FeedPage implements OnInit {
         if(this.postData3.phone_number !=="")
         {  
         this.tickColor3="primary"
-       this.http.post('http://127.0.0.1:8000/api/account/phone' , this.postData3, this.getHeaders()  ).subscribe(
+       this.http.post('http://api.princesolutions.co.za/api/account/phone' , this.postData3, this.getHeaders()  ).subscribe(
          // check errors
        (res: any) => {
          this.tickColor3="success"
@@ -208,7 +208,7 @@ export class FeedPage implements OnInit {
 
  public verify() {
 
-    this.http.get('http://127.0.0.1:8000/api/auth/user', this.getHeaders()).subscribe((data) => {
+    this.http.get('http://api.princesolutions.co.za/api/auth/user', this.getHeaders()).subscribe((data) => {
 
       this.userInfo = data;
     ; 

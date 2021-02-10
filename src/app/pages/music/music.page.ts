@@ -141,7 +141,7 @@ getHeaders() {
   this.showProgressBar();
   if ( this.form.get('files').value !== ' ' ) {
     // my posting image to backend
-    this.http.post('http://127.0.0.1:8000/api/file/audio' , formData, this.getHeaders()  ).subscribe(
+    this.http.post('http://api.princesolutions.co.za/api/file/audio' , formData, this.getHeaders()  ).subscribe(
         // check errors
       (response: any) => {
         this.toastService.presentToast('Music Uploaded successfully.');
@@ -173,7 +173,7 @@ getHeaders() {
 
 
     // my posting image to backend
-    this.http.get('http://127.0.0.1:8000/api/file/audio', this.getHeaders()   ).subscribe((apart: any) => {
+    this.http.get('http://api.princesolutions.co.za/api/file/audio', this.getHeaders()   ).subscribe((apart: any) => {
         this.imgProps = apart;
         console.log(this.imgProps);
 
@@ -189,7 +189,7 @@ getHeaders() {
 deleteMusic(i) {
 
 
-  this.http.delete('http://127.0.0.1:8000/api/file' + '/' + i  , this.getHeaders()  ).subscribe(
+  this.http.delete('http://api.princesolutions.co.za/api/file' + '/' + i  , this.getHeaders()  ).subscribe(
     // check errors
   (res: any) => {
     this.toastService.presentToast('Track deleted successfully.');
@@ -240,7 +240,7 @@ async AlertDeleteMusic(i) {
 downloadMusic(i) {
 
 
-  this.http.post('http://127.0.0.1:8000/api/file/download' + '/' + i , this.getHeaders()  ).subscribe(
+  this.http.post('http://api.princesolutions.co.za/api/file/download' + '/' + i , this.getHeaders()  ).subscribe(
     // check errors and response
   (res: any) => {
     this.toastService.presentToast('Track downloaded successfully.');

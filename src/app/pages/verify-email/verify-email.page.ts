@@ -98,7 +98,7 @@ verifyEmail() {
     this.showProgressBar();
 
     
-      this.http.get('http://127.0.0.1:8000/api/email/resend',this.getHeaders()).subscribe(
+      this.http.get('http://api.princesolutions.co.za/api/email/resend',this.getHeaders()).subscribe(
           // check errors and response
         (response: any) => {
           if(response){

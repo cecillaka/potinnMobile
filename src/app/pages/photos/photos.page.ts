@@ -167,7 +167,7 @@ getHeaders() {
   this.showProgressBar();
   if ( this.form.get('files').value !== ' ' ) {
     // my posting image to backend
-    this.http.post('http://127.0.0.1:8000/api/file/image' , formData, this.getHeaders()  ).subscribe(
+    this.http.post('http://api.princesolutions.co.za/api/file/image' , formData, this.getHeaders()  ).subscribe(
         // check errors
       (res: any) => {
         this.toastService.presentToast('Picture Upload successfully.');
@@ -205,7 +205,7 @@ getImages() {
 
 
  // my posting image to backend
- this.http.get('http://127.0.0.1:8000/api/file/image', this.getHeaders()).subscribe((data) => {
+ this.http.get('http://api.princesolutions.co.za/api/file/image', this.getHeaders()).subscribe((data) => {
 
      this.imgProps = data;
     //  this.imageData$ = data;
@@ -232,7 +232,7 @@ getImages() {
 deleteImage(i) {
 
 
-  this.http.delete('http://127.0.0.1:8000/api/file' + '/' + i  , this.getHeaders()  ).subscribe(
+  this.http.delete('http://api.princesolutions.co.za/api/file' + '/' + i  , this.getHeaders()  ).subscribe(
     // check errors
   (res: any) => {
     this.toastService.presentToast('Picture deleted successfully.');
@@ -284,7 +284,7 @@ async AlertDeleteImage(i) {
 downloadImage(i) {
 
 
-  this.http.get('http://127.0.0.1:8000/api/file/download' + '/' + i , this.getHeaders()  ).subscribe(
+  this.http.get('http://api.princesolutions.co.za/api/file/download' + '/' + i , this.getHeaders()  ).subscribe(
     // check errors and response
   (res: any) => {
     this.toastService.presentToast('Picture downloaded successfully.');

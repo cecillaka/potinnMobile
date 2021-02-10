@@ -13,7 +13,7 @@ export class HttpService {
 
   post(serviceName: string, data: any) {
     // const url = environment.apiUrl + serviceName //JSON.stringify(data);
-    const url = 'http://127.0.0.1:8000/api/auth/' + serviceName;
+    const url = 'http://api.princesolutions.co.za/api/auth/' + serviceName;
     return this.http.post(url, data, this.options);
   }
 

@@ -36,7 +36,7 @@ forgotPassword() {
 
 if ( this.postData.email !== ' ' ) {
   // sent email t
-  this.http.post('http://127.0.0.1:8000/api/password/email',this.postData  ).subscribe(
+  this.http.post('http://api.princesolutions.co.za/api/password/email',this.postData  ).subscribe(
       // check errors
     (response: any) => {  
       this.toastService.presentToast('request sent successfully. please check your email!');
